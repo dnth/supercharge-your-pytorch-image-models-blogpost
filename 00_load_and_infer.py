@@ -23,8 +23,6 @@ with torch.inference_mode():
     output = model(transforms(img).unsqueeze(0))
 
 top5_probabilities, top5_class_indices = torch.topk(output.softmax(dim=1) * 100, k=5)
-
-
 im_classes = list(IMAGENET2012_CLASSES.values())
 class_names = [im_classes[i] for i in top5_class_indices[0]]
 
