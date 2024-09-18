@@ -35,7 +35,7 @@ if __name__ == "__main__":
         output_onnx_file,
         opset_version=20,
         input_names=["input_rgb"],
-        output_names=["output_prep"],
+        output_names=["output_preprocessing"],
         dynamic_axes={
             "input_rgb": {
                 0: "batch_size",

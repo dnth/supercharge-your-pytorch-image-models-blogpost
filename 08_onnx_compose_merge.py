@@ -9,7 +9,7 @@ model2 = onnx.load("eva02_large_patch14_448.onnx")
 merged_model = compose.merge_models(
     model1,
     model2,
-    io_map=[("output_prep", "input")],
+    io_map=[("output_preprocessing", "input")],
     prefix1="preprocessing_",
     prefix2="model_",
     doc_string="Merged preprocessing and eva02_large_patch14_448 model",
