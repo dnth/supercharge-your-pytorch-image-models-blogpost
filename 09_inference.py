@@ -74,7 +74,7 @@ providers = [
     ),
 ]
 
-session = ort.InferenceSession("merged.onnx", providers=providers)
+session = ort.InferenceSession("merged_model_compose.onnx", providers=providers)
 
 input_name = session.get_inputs()[0].name
 output_name = session.get_outputs()[0].name
@@ -83,7 +83,7 @@ output = session.run([output_name], {input_name: read_image(img)})
 
 print(output[0])
 
-num_images = 10
+num_images = 1000
 start = time.perf_counter()
 for i in range(num_images):
     output = session.run([output_name], {input_name: read_image(img)})
