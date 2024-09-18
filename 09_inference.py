@@ -4,7 +4,10 @@ from urllib.request import urlopen
 import cupy as cp
 import numpy as np
 import onnxruntime as ort
+import torch
 from PIL import Image
+
+from imagenet_classes import IMAGENET2012_CLASSES
 
 img = Image.open(
     urlopen(
@@ -82,6 +85,20 @@ output_name = session.get_outputs()[0].name
 output = session.run([output_name], {input_name: read_image(img)})
 
 print(output[0])
+
+# Check the output
+output = torch.from_numpy(output[0])
+print(output.shape)
+
+
+top5_probabilities, top5_class_indices = torch.topk(output.softmax(dim=1) * 100, k=5)
+
+im_classes = list(IMAGENET2012_CLASSES.values())
+class_names = [im_classes[i] for i in top5_class_indices[0]]
+
+# Print class names and probabilities
+for name, prob in zip(class_names, top5_probabilities[0]):
+    print(f"{name}: {prob:.2f}%")
 
 num_images = 1000
 start = time.perf_counter()
