@@ -5,12 +5,13 @@ from PIL import Image
 
 def read_image(filename: str):
     img = Image.open(filename)
+    img = img.resize((448, 448))
     img = np.array(img)
-    img = img.astype(np.uint8)
+    img = img.astype(np.float32)
     return img
 
 
-onnx_filename = "eva02_large_patch14_448_pre_simplified.onnx"
+onnx_filename = "eva02_large_patch14_448_prepost.onnx"
 providers = [
     (
         "TensorrtExecutionProvider",
