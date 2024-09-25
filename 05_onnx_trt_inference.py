@@ -85,9 +85,7 @@ time_taken = end - start
 ms_per_image = time_taken / num_images * 1000
 fps = num_images / time_taken
 
-print(
-    f"Onnxruntime CUDA numpy transforms: {ms_per_image:.3f} ms per image, FPS: {fps:.2f}"
-)
+print(f"TensorRT + numpy: {ms_per_image:.3f} ms per image, FPS: {fps:.2f}")
 
 
 # Run benchmark cupy
@@ -102,6 +100,4 @@ time_taken = end - start
 ms_per_image = time_taken / num_images * 1000
 fps = num_images / time_taken
 
-print(
-    f"Onnxruntime CUDA cupy transforms: {ms_per_image:.3f} ms per image, FPS: {fps:.2f}"
-)
+print(f"TensorRT + cupy : {ms_per_image:.3f} ms per image, FPS: {fps:.2f}")
