@@ -1,3 +1,5 @@
+![PyTorch to ONNX-TensorRT](https://dicksonneoh.com/images/portfolio/supercharge_your_pytorch_image_models/post_image.png)
+
 # Pytorch to ONNX-TensorRT
 
 This repository contains a script to convert a PyTorch model to ONNX format and then to TensorRT format.
