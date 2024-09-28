@@ -84,7 +84,7 @@ output_name = session.get_outputs()[0].name
 
 output = session.run([output_name], {input_name: read_image(img)})
 
-print(output[0])
+# print(output[0])
 
 # Check the output
 output = torch.from_numpy(output[0])
