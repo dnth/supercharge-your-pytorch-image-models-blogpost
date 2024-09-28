@@ -89,7 +89,28 @@ Read more [here](https://dicksonneoh.com/portfolio/supercharge_your_pytorch_imag
    ```
 Read more [here](https://dicksonneoh.com/portfolio/supercharge_your_pytorch_image_models//#-bake-pre-processing-into-onnx)
 
+### Run inference on video:
+   ```bash
+   python 09_video_inference.py sample.mp4 output.mp4 --live 
+   ```
 
+<video src="https://github.com/dnth/supercharge-your-pytorch-image-models-blogpost/raw/refs/heads/main/output.mp4"></video>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player</title>
+</head>
+<body>
+    <h1>Watch the Video</h1>
+    <video width="640" height="360" controls>
+        <source src="https://github.com/dnth/supercharge-your-pytorch-image-models-blogpost/raw/refs/heads/main/output.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</body>
+</html>
 
 <!-- # Pytorch to ONNX-TensorRT
 
