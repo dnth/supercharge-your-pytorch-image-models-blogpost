@@ -39,55 +39,54 @@ export LD_LIBRARY_PATH="/home/dnth/mambaforge-pypy3/envs/supercharge_timm_tensor
 
 ## Running the code
 
-Run the following scripts in order:
+The following codes correspond to the steps in the blog post.
 
-1. PyTorch latency benchmark:
+### PyTorch latency benchmark:
    ```bash
    python 01_pytorch_latency_benchmark.py
    ```
 Read more [here](https://dicksonneoh.com/portfolio/supercharge_your_pytorch_image_models//#-baseline-latency)
 
-2. Convert model to ONNX:
+### Convert model to ONNX:
    ```bash
    python 02_convert_to_onnx.py
    ```
 Read more [here](https://dicksonneoh.com/portfolio/supercharge_your_pytorch_image_models//#-convert-to-onnx)
 
-3. ONNX Runtime CPU inference:
+### ONNX Runtime CPU inference:
    ```bash
    python 03_onnx_cpu_inference.py
    ```
 Read more [here](https://dicksonneoh.com/portfolio/supercharge_your_pytorch_image_models//#-onnx-runtime-on-cpu)
 
-4. ONNX Runtime CUDA inference:
+### ONNX Runtime CUDA inference:
    ```bash
    python 04_onnx_cuda_inference.py
    ```
 Read more [here](https://dicksonneoh.com/portfolio/supercharge_your_pytorch_image_models//#-onnx-runtime-on-cuda)
 
-5. ONNX Runtime TensorRT inference:
+### ONNX Runtime TensorRT inference:
    ```bash
    python 05_onnx_trt_inference.py
    ```
 Read more [here](https://dicksonneoh.com/portfolio/supercharge_your_pytorch_image_models//#-onnx-runtime-on-tensorrt)
 
-6. Export preprocessing to ONNX:
+### Export preprocessing to ONNX:
    ```bash
    python 06_export_preprocessing_onnx.py
    ```
 Read more [here](https://dicksonneoh.com/portfolio/supercharge_your_pytorch_image_models//#-bake-pre-processing-into-onnx)
 
-7. Merge preprocessing and model ONNX:
+### Merge preprocessing and model ONNX:
    ```bash
    python 07_onnx_compose_merge.py
    ```
 Read more [here](https://dicksonneoh.com/portfolio/supercharge_your_pytorch_image_models//#-bake-pre-processing-into-onnx)
 
-8. Run inference on merged model:
+### Run inference on merged model:
    ```bash
    python 08_inference_merged_model.py
    ```
-
 Read more [here](https://dicksonneoh.com/portfolio/supercharge_your_pytorch_image_models//#-bake-pre-processing-into-onnx)
 
 
