@@ -12,8 +12,9 @@ from imagenet_classes import IMAGENET2012_CLASSES
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Video inference with TensorRT")
-    parser.add_argument("input_video", type=str, help="Path to input video file")
-    parser.add_argument("output_video", type=str, help="Path to output video file")
+    parser.add_argument("--output_video", type=str, help="Path to output video file")
+    parser.add_argument("--input_video", type=str, help="Path to input video file")
+    parser.add_argument("--webcam", action="store_true", help="Use webcam as input")
     parser.add_argument("--live", action="store_true", help="View video live during inference")
     return parser.parse_args()
 
@@ -72,14 +73,20 @@ def draw_predictions(frame, predictions, fps):
 
     return frame
 
-def process_video(input_path, output_path, session, live_view=False):
-    cap = cv2.VideoCapture(input_path)
+def process_video(input_path, output_path, session, live_view=False, use_webcam=False):
+    if use_webcam:
+        cap = cv2.VideoCapture(0)
+    else:
+        cap = cv2.VideoCapture(input_path)
+    
     width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     fps = int(cap.get(cv2.CAP_PROP_FPS))
     
-    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-    out = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
+    out = None
+    if output_path:
+        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+        out = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
 
     input_name = session.get_inputs()[0].name
     output_name = session.get_outputs()[0].name
@@ -105,7 +112,8 @@ def process_video(input_path, output_path, session, live_view=False):
         
         frame_with_predictions = draw_predictions(frame, predictions, current_fps)
         
-        out.write(frame_with_predictions)
+        if out:
+            out.write(frame_with_predictions)
         
         if live_view:
             cv2.imshow('Inference', frame_with_predictions)
@@ -118,7 +126,8 @@ def process_video(input_path, output_path, session, live_view=False):
         print(f"Processed frame {frame_count}, Time: {frame_time:.3f}s, FPS: {current_fps:.2f}")
 
     cap.release()
-    out.release()
+    if out:
+        out.release()
     cv2.destroyAllWindows()
 
     avg_time = total_time / frame_count
@@ -128,7 +137,14 @@ def process_video(input_path, output_path, session, live_view=False):
 def main():
     args = parse_arguments()
     session = get_ort_session("merged_model_compose.onnx")
-    process_video(args.input_video, args.output_video, session, args.live)
+    
+    if args.webcam:
+        process_video(None, args.output_video, session, args.live, use_webcam=True)
+    elif args.input_video:
+        process_video(args.input_video, args.output_video, session, args.live)
+    else:
+        print("Error: Please specify either --input_video or --webcam")
+        return
 
 if __name__ == "__main__":
     main()
