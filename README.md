@@ -96,6 +96,10 @@ Read more [here](https://dicksonneoh.com/portfolio/supercharge_your_pytorch_imag
 
 
 
+https://github.com/user-attachments/assets/1a25dd6e-3512-475a-9541-29e836022bb5
+
+
+
 
 
 <!-- # Pytorch to ONNX-TensorRT
