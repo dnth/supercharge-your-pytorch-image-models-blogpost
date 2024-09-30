@@ -1,12 +1,9 @@
 import argparse
 import time
-from pathlib import Path
 
 import cv2
 import numpy as np
 import onnxruntime as ort
-import torch
-from PIL import Image
 
 from imagenet_classes import IMAGENET2012_CLASSES
 
@@ -53,11 +50,18 @@ def preprocess_frame(frame):
 
 
 def get_top_predictions(output, top_k=5):
-    output = torch.from_numpy(output)
-    probabilities, class_indices = torch.topk(output.softmax(dim=1) * 100, k=top_k)
+    # Apply softmax
+    exp_output = np.exp(output - np.max(output, axis=1, keepdims=True))
+    probabilities = exp_output / np.sum(exp_output, axis=1, keepdims=True)
+
+    # Get top k indices and probabilities
+    top_indices = np.argsort(probabilities[0])[-top_k:][::-1]
+    top_probs = probabilities[0][top_indices] * 100
+
     im_classes = list(IMAGENET2012_CLASSES.values())
-    class_names = [im_classes[i] for i in class_indices[0]]
-    return list(zip(class_names, probabilities[0].tolist()))
+    class_names = [im_classes[i] for i in top_indices]
+
+    return list(zip(class_names, top_probs.tolist()))
 
 
 def draw_predictions(frame, predictions, fps):
