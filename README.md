@@ -41,6 +41,12 @@ export LD_LIBRARY_PATH="/home/dnth/mambaforge-pypy3/envs/supercharge_timm_tensor
 
 The following codes correspond to the steps in the blog post.
 
+### Load timm model and run inference:
+   ```bash
+   python 00_load_and_infer.py
+   ```
+Read more [here](https://dicksonneoh.com/portfolio/supercharge_your_pytorch_image_models/#-load-and-infer)
+
 ### PyTorch latency benchmark:
    ```bash
    python 01_pytorch_latency_benchmark.py
