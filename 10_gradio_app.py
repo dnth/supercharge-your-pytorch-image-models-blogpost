@@ -41,12 +41,16 @@ def predict(img):
     return results
 
 
+# Add an example image
+example_image = "beignets-task-guide.png"
+
 iface = gr.Interface(
     fn=predict,
     inputs=gr.Image(type="pil"),
     outputs=gr.Label(num_top_classes=5),
     title="Image Classification with ONNX TensorRT",
     description="Upload an image to classify it using the ONNX TensorRT model.",
+    examples=[example_image],  # Add the example image to the interface
 )
 
 if __name__ == "__main__":
