@@ -48,8 +48,8 @@ iface = gr.Interface(
     fn=predict,
     inputs=gr.Image(type="pil"),
     outputs=gr.Label(num_top_classes=5),
-    title="Image Classification with ONNX TensorRT",
-    description="Upload an image to classify it using the ONNX TensorRT model.",
+    title="Image Classification with ONNX using EVA02 model",
+    description="Blog post: https://dicksonneoh.com/portfolio/supercharge_your_pytorch_image_models/",
     examples=[example_image],  # Add the example image to the interface
 )
 
